@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <meta name="description" content="A little space for a good conversation. Start a private chat with a six-digit code.">
+  <title>Kindred — a little space to talk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Kindred home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M16 26s-10-5.8-10-13a5.5 5.5 0 0 1 10-3.2A5.5 5.5 0 0 1 26 13c0 7.2-10 13-10 13Z"/><path d="M11.5 15.5h9M16 11v9"/></svg>
+      </span>
+      <span>kindred<span class="brand-period">.</span></span>
+    </a>
+    <div class="topbar-note"><span class="privacy-dot"></span> Just the two of you</div>
+  </header>
+
+  <main>
+    <section class="welcome-view" id="welcome-view">
+      <div class="welcome-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> A little space to talk</div>
+        <h1>Good conversations<br>start <span>with being here.</span></h1>
+        <p class="intro">No accounts, no noise. Just you, someone you care about, and a quiet place to catch up.</p>
+        <div class="welcome-details">
+          <div class="detail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.4 3 8.4 7 10 4-1.6 7-5.6 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div><strong>Private by design</strong><span>Your messages go straight between you.</span></div>
+        </div>
+      </div>
+
+      <div class="entry-card">
+        <div class="card-heading">
+          <div class="card-kicker">PICK UP THE PHONE</div>
+          <h2>Meet me here.</h2>
+          <p>Start a new room or join with a code from a friend.</p>
+        </div>
+
+        <label class="field-label" for="display-name">Your name <span>optional</span></label>
+        <input class="name-input" id="display-name" type="text" maxlength="24" placeholder="What should they call you?">
+
+        <button class="primary-button" id="create-room" type="button">
+          <span>Start a room</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </button>
+        <div class="button-caption"><span class="tiny-lock" aria-hidden="true">✳</span> Your room is ready in a moment</div>
+
+        <div class="divider"><span>or join a friend</span></div>
+
+        <label class="field-label" for="room-code">Six-digit room code</label>
+        <div class="join-row">
+          <input id="room-code" class="code-input" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" aria-describedby="entry-message">
+          <button class="join-button" id="join-room" type="button" aria-label="Join room">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="form-message" id="entry-message" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="page-foot"><span>Made for the people you miss.</span><span>Chat first. Video when you’re ready.</span></div>
+    </section>
+
+    <section class="conversation-view is-hidden" id="conversation-view" aria-label="Conversation">
+      <div class="conversation-shell">
+        <aside class="room-sidebar">
+          <a class="brand sidebar-brand" href="/" aria-label="Kindred home">
+            <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 26s-10-5.8-10-13a5.5 5.5 0 0 1 10-3.2A5.5 5.5 0 0 1 26 13c0 7.2-10 13-10 13Z"/><path d="M11.5 15.5h9M16 11v9"/></svg></span>
+            <span>kindred<span class="brand-period">.</span></span>
+          </a>
+          <div class="room-summary">
+            <div class="room-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3.5-.8L4 20l1.4-4.2A7.5 7.5 0 1 1 20 11.5Z"/></svg>
+            </div>
+            <div class="room-title">Your little corner</div>
+            <div class="room-subtitle">A private conversation for two</div>
+          </div>
+          <div class="invite-card">
+            <span class="invite-label">YOUR ROOM CODE</span>
+            <div class="invite-code" id="display-room-code">------</div>
+            <button class="copy-button" id="copy-code" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+              <span>Copy invite code</span>
+            </button>
+            <p>Send this to your person so they can find you.</p>
+          </div>
+          <div class="people-card">
+            <span class="invite-label">IN THIS ROOM</span>
+            <div class="person-row">
+              <span class="avatar avatar-you" id="your-avatar">Y</span>
+              <span class="person-name" id="your-name">You</span>
+              <span class="online-indicator" title="You’re here"></span>
+            </div>
+            <div class="person-row">
+              <span class="avatar avatar-them" id="them-avatar">?</span>
+              <span class="person-name" id="them-name">Waiting for them</span>
+              <span class="waiting-indicator" id="them-indicator"></span>
+            </div>
+          </div>
+          <button class="leave-button" id="leave-room" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3m9-9h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg>
+            Leave conversation
+          </button>
+          <div class="sidebar-foot">A little more human, one hello at a time.</div>
+        </aside>
+
+        <div class="chat-panel">
+          <header class="chat-header">
+            <div class="chat-heading">
+              <div class="chat-title" id="chat-title">A room of your own</div>
+              <div class="connection-status"><span class="status-dot" id="status-dot"></span><span id="connection-status">Waiting for your person</span></div>
+            </div>
+            <button class="video-button" id="start-call" type="button" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/></svg>
+              <span>Start a video call</span>
+            </button>
+          </header>
+
+          <div class="messages" id="messages" aria-live="polite" aria-label="Messages">
+            <div class="waiting-note" id="waiting-note">
+              <div class="waiting-art" aria-hidden="true">
+                <span class="waiting-sun"></span>
+                <span class="waiting-hill waiting-hill-one"></span>
+                <span class="waiting-hill waiting-hill-two"></span>
+                <span class="waiting-flower">✳</span>
+              </div>
+              <h3>Good things take a hello.</h3>
+              <p>Share your six-digit code and your person can join you here.</p>
+            </div>
+          </div>
+
+          <form class="composer" id="message-form">
+            <input id="message-input" type="text" maxlength="2000" placeholder="Write something lovely…" autocomplete="off" disabled aria-label="Write a message">
+            <button class="send-button" id="send-message" type="submit" disabled aria-label="Send message">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            </button>
+          </form>
+          <div class="composer-caption"><span>Enter to send</span><span>Only the two of you can see this chat</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="call-overlay is-hidden" id="call-overlay" aria-label="Video call">
+    <div class="call-topline">
+      <div><span class="call-live-dot"></span><span id="call-status">Connecting your call…</span></div>
+      <button class="call-close" id="end-call" type="button" aria-label="End call">×</button>
+    </div>
+    <div class="video-stage">
+      <div class="remote-video-wrap">
+        <video id="remote-video" autoplay playsinline></video>
+        <div class="remote-placeholder" id="remote-placeholder"><span class="avatar avatar-them">?</span><span>Waiting for video…</span></div>
+        <span class="video-name" id="remote-video-name">Your person</span>
+      </div>
+      <div class="local-video-wrap">
+        <video id="local-video" autoplay muted playsinline></video>
+        <span class="video-name">You</span>
+      </div>
+    </div>
+    <div class="call-controls">
+      <button class="call-control" id="toggle-mic" type="button" aria-label="Mute microphone">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2m-7 9v3m-4 0h8"/></svg>
+      </button>
+      <button class="call-control" id="toggle-camera" type="button" aria-label="Turn camera off">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/></svg>
+      </button>
+      <button class="call-control hangup-control" id="hangup" type="button" aria-label="End call">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15.5c4.9-4.2 13.1-4.2 18 0l-2.3 3.2a1.5 1.5 0 0 1-1.8.5l-2.4-1a1.5 1.5 0 0 1-.9-1.4v-1a13.4 13.4 0 0 0-3.2 0v1a1.5 1.5 0 0 1-.9 1.4l-2.4 1a1.5 1.5 0 0 1-1.8-.5L3 15.5Z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <div class="incoming-call is-hidden" id="incoming-call" role="dialog" aria-modal="true" aria-labelledby="incoming-title">
+    <div class="incoming-card">
+      <span class="incoming-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/></svg>
+      </span>
+      <h2 id="incoming-title">Your person is calling</h2>
+      <p>Pick up and say hello?</p>
+      <div class="incoming-actions">
+        <button class="decline-call" id="decline-call" type="button">Not now</button>
+        <button class="accept-call" id="accept-call" type="button">Answer call</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <script src="/script.js"></script>
+</body>
+</html>
