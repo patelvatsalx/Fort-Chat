@@ -14,5 +14,5 @@ app.get('/', (_request, response) => response.sendFile(path.join(__dirname, 'ind
 
 const port = Number(process.env.PORT) || 5500;
 server.listen(port, () => {
-  console.log(`Kindred is ready at http://localhost:${port}`);
+  console.log(`Fort Chat is ready at ${port}`);
 });
