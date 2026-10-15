@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: fort-chat
+    runtime: node
+    plan: free
+    rootDir: public
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /
